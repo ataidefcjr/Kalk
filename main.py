@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 
 valor_atual = ''
-lista_teclas=['0','1','2','3','4','5','6','7','8','9','/','*','-','+','.','enter','=']
+lista_teclas=['0','1','2','3','4','5','6','7','8','9','/','*','-','+','.','Return', 'KP_Enter','=', 'BackSpace', 'Escape']
 
 janela = Tk()
 janela.title = ("Kalk")
@@ -77,14 +77,17 @@ bte.place(x=x*3,y=y*4)
 #Recebe a entrada e apresenta na tela
 def entrada(character):
     global valor_atual
-    #Verifica se a tela tem erro ou 0 e limpa
+    #Verifica se a tela tem erro ou 0 e / ou botao clear apertado e limpa
     if valor_atual == 'Erro' or valor_atual == '0':
         valor_atual = ''
         visor.set(valor_atual)
-    #Limpa se for apertado o clear
-    if character == 'clear':
+        valor_atual = valor_atual + str(character) 
+    elif character == 'clear':
         valor_atual = ''
-    else: # Apresenta na tela o botao apertado
+        visor.set(valor_atual)
+    elif character == 'backspace':
+        valor_atual = valor_atual[:-1]
+    else:
         valor_atual = valor_atual + str(character) 
     visor.set(valor_atual)
 
@@ -99,5 +102,21 @@ def calcular():
         visor.set('Erro')
         valor_atual = 'Erro'
 
+###Bindando as teclas###
+# Função para associar as teclas do teclado aos botões
+def tecla_pressionada(event):
+    if event.char in lista_teclas or event.keysym in lista_teclas:
+        if event.keysym == 'KP_Enter' or event.keysym == 'Return' or event.char == '=':
+            calcular()
+        elif event.char in '0123456789/*-+.%':
+            entrada(event.char)
+        elif event.keysym == 'BackSpace':
+            entrada('backspace')
+        elif event.keysym == 'Escape':
+            entrada('clear')    
+
+# Vincula as teclas à função tecla_pressionada
+
 if __name__ == "__main__":
+    janela.bind('<Key>', tecla_pressionada)
     janela.mainloop()
