@@ -3,14 +3,18 @@ from tkinter import ttk
 
 janela = Tk()
 janela.title = ("Kalk")
-janela.geometry("350x440")
+janela.geometry("350x410")
 janela.config(bg='#1e1e1e')
 
 #Frames
-frame_tela = Frame(janela, width = 350, height = 100, bg="#334750", borderwidth='10')
+frame_tela = Frame(janela, width = 350, height = 70, bg="#334750", borderwidth='10')
 frame_tela.grid(row=0, column=0)
 frame_botoes = Frame(janela, width = 350, height = 340, bg="#454545", borderwidth='10')
 frame_botoes.grid(row=1, column=0)
+
+#Label
+tela_label = Label(frame_tela, text='12345678900000000', width = 15, height = 1, relief=FLAT, anchor='e', justify=RIGHT, font = "times 25", bg="#334750", fg="#fefefe")
+tela_label.place(x=6,y=10)
 
 ## Botoes
 largura = 5
