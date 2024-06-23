@@ -10,8 +10,6 @@ janela.geometry("350x430")
 janela.config(bg='#1e1e1e')
 janela.resizable(False, False)
 
-
-
 #Frames
 frame_tela = Frame(janela, width = 350, height = 70, bg="#292929", borderwidth='10')
 frame_tela.grid(row=0, column=0)
