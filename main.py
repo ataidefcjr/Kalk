@@ -1,5 +1,4 @@
-from tkinter import *
-from tkinter import ttk
+from tkinter import Tk, Frame, StringVar, Label, FLAT, RIGHT, Button
 
 valor_atual = ''
 lista_teclas=['0','1','2','3','4','5','6','7','8','9','/','*','-','+','.','Return', 'KP_Enter','=', 'BackSpace', 'Escape']
@@ -78,29 +77,49 @@ bte.place(x=x*3,y=y*4)
 def entrada(character):
     global valor_atual
     #Verifica se a tela tem erro ou 0 e / ou botao clear apertado e limpa
-    if valor_atual == 'Erro' or valor_atual == '0':
+    if valor_atual == 'Erro' or valor_atual == '0' or valor_atual == 'clear' or valor_atual[-1:] == '~':
         valor_atual = ''
+        valor_atual = str(character) 
         visor.set(valor_atual)
-        valor_atual = valor_atual + str(character) 
+        if character == 'clear':
+            valor_atual == ''
+            visor.set(valor_atual)
     elif character == 'clear':
         valor_atual = ''
         visor.set(valor_atual)
     elif character == 'backspace':
         valor_atual = valor_atual[:-1]
+        visor.set(valor_atual)
     else:
         valor_atual = valor_atual + str(character) 
-    visor.set(valor_atual)
+        visor.set(valor_atual)
 
 #Realiza o calculo do que esta presente na tela
 def calcular():
     global valor_atual
-    try:
-        resultado = eval(valor_atual)
-        valor_atual = str(resultado)
-        visor.set(resultado)
-    except:
-        visor.set('Erro')
-        valor_atual = 'Erro'
+    if valor_atual == 'Erro' or valor_atual == '' or valor_atual == '0':
+        valor_atual = ''
+        visor.set(valor_atual)
+    else:
+    #Uso de try para apresentar erro na tela caso aconteça algum erro
+        try:
+            #Calcula
+            resultado = eval(valor_atual)
+            #Verifica se é inteiro e transforma em inteiro se for
+            if resultado == int(resultado):
+                resultado = int(resultado)
+            #Transforma em string
+            str_resultado = str(resultado)
+            #Se o resultado for maior que 14 caracteres entao trunca em 13 e apresenta ...
+            if len(str_resultado) > 14:
+                str_resultado = str_resultado[:14] +'~'
+            #Define o valor atual como o valor do resultado e seta o visor com o valor
+            valor_atual = str_resultado
+            visor.set(valor_atual)
+        except Exception as erro:
+            visor.set('Erro')
+            valor_atual = 'Erro'
+            print(erro)
 
 ###Bindando as teclas###
 # Função para associar as teclas do teclado aos botões
