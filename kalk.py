@@ -140,7 +140,7 @@ def tecla_pressionada(event):
         elif event.keysym == 'BackSpace':
             entrada('backspace')
         elif event.keysym == 'Escape':
-            entrada('clear')    
+            entrada('clear')   
 
 # Vincula as teclas à função tecla_pressionada
 
