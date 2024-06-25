@@ -9,17 +9,8 @@
 <p>$ git clone https://github.com/ataidefcjr/Kalk.git</p>
 <p># Navegue até a pasta kalk</p>
 <p>$ cd kalk</p>
-<p>#Instale a biblioteca TKInter</p>
-<p>$ pip install tk</p>
 <p>#Execute o Script</p>
 <p>$ python kalk.py</p>
-
-
-<h3 align="center">Como compilar em executável</h3>
-<p># Baixe o Pyinstaller</p>
-<p>$ pip install pyinstaller</p>
-<p># Navegue ate a pasta kalk</p>
-<p>$ pyinstaller --onefile --noconsole -i kalk.ico kalk.py</p>
 
 
 
